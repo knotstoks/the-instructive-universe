@@ -9,12 +9,14 @@ public class PlayerData : MonoBehaviour
     public float playerSpeed;
     public float diagSlowDown;
     Vector2 movement;
-    private int strikes = 0;
+    public int strikes;
+
+    private PlayerUI playerUI;
 
     // Start is called before the first frame update
     void Start()
     {
-
+        strikes = 0;
     }
 
     // Update is called once per frame
@@ -22,10 +24,6 @@ public class PlayerData : MonoBehaviour
     {
         movement.x = Input.GetAxisRaw("Horizontal");
         movement.y = Input.GetAxisRaw("Vertical");
-
-        if (strikes == 3) {
-            
-        }
     }
 
     void FixedUpdate() 
@@ -37,7 +35,7 @@ public class PlayerData : MonoBehaviour
         }
     }
 
-    public void lostScreen() {
+    public void loseScreen() {
 
     }
 }
