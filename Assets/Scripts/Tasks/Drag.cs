@@ -1,38 +1,35 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.EventSystems;
 
-public class Drag : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, IEndDragHandler, IDragHandler {
+public class Drag : MonoBehaviour {
 
-    private GameObject tasksUI = GameObject.Find("TasksUI");
-    private Canvas canvas = FindObjectsOfType<Canvas>();
-    
+    public GameObject slot1;
+    public GameObject slot2;
+    public GameObject slot3;
+    public GameObject slot4;
+    public GameObject slot5;
 
-    private RectTransform rectTransform;
-    private CanvasGroup canvasGroup;
+    private bool moving;
 
-    private void Awake() {
-        rectTransform = GetComponent<RectTransform>();
-        canvasGroup = GetComponent<CanvasGroup>();
+
+    void Start() {
+
     }
 
-    public void OnBeginDrag(PointerEventData eventData) {
-        canvasGroup.alpha = 0.6f;
-        canvasGroup.blocksRaycasts = false;
+    void Update() {
+            if (moving) {
+                Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
+                transform.Translate(mousePosition);
+            }
     }
 
-    public void OnDrag(PointerEventData eventData) {
-        rectTransform.anchoredPosition += eventData.delta / canvas.scaleFactor;
+    private void OnMouseDown() {
+        moving = true;
     }
 
-    public void OnEndDrag(PointerEventData eventData) {
-        canvasGroup.alpha = 1f;
-        canvasGroup.blocksRaycasts = true;
-    }
-
-    public void OnPointerDown(PointerEventData eventData) {
-
+    private void OnMouseUp() {
+        moving = false;
     }
 
 
